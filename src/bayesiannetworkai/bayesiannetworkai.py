@@ -1,6 +1,7 @@
 from pgmpy.models import BayesianNetwork as BN
 from pgmpy.factors.discrete.CPD import TabularCPD
-
+import numpy as np
+from pgmpy.inference import VariableElimination
 
 class BayesianNetwork(object):
 
@@ -8,8 +9,9 @@ class BayesianNetwork(object):
         self.model = BN(nodos)
         self.nodos_atributes = nodos_atributes
         self.build_graph(nodos)
+        self.cps = {}
         self.set_probabilities()
-        self.factors()
+        # self.factors()
         
     def build_graph(self, nodes):
         self.graph = {}
@@ -25,31 +27,58 @@ class BayesianNetwork(object):
         for nodo in self.nodos_atributes:
             if len(nodo) == 2:
                 element = TabularCPD(nodo[0], 2, nodo[1])
+                self.cps[nodo[0]] = [nodo[1]]
                 
             else:
                 temp = []
                 for i in range(len(nodo[2])):
                     temp.append(2)
                 element = TabularCPD(nodo[0], 2, nodo[1], nodo[2], temp)
-            print(element.values)
+                self.cps[nodo[0]] = [nodo[1], nodo[2]]
             cpds.append(element)
         
         for element in cpds:
             self.model.add_cpds(element)
-    '''
-    def enumeration(self, query, evidence):
-        nodes = self.model.nodes()
-        for node in nodes:
-            numerator = 1
-            denominator = 1
-            for parent in model.get_parents(node):
-                numerator *= cpd_b.values[evidence[parent], :].prod()
-                denominator *= cpd_b.values[:, :].prod()
-            maringal_prob = numerator / denominator
-        return "Error"
-        
-    '''
+
+    def pamientras(self,node,evidence):
+        inference = VariableElimination(self.model)
+        return inference.query(variables =[node], evidence=evidence)
     
+    '''
+    def enumeration(self, X, evidence):
+        Q = {}
+
+        for xi in [0, 1]:
+            evidence[X] = xi
+            Q[xi] = self.enumerate_all(list(self.model.nodes()), evidence)
+
+    def enumerate_all(self, variables, e):
+        if not variables:
+            return 1.0
+        print(variables)
+        print(e)
+        Y = variables[0]
+        # prob(Variable, valor, condiciones)
+        print(self.prob(Y, e[Y], e))
+        return 0
+        
+        if Y in e:
+            return self.prob(Y, e[Y], e) * self.enumerate_all(rest, e)
+
+        else:
+            total = 0
+            for y in [0, 1]:
+                e[Y] = y
+                total += self.prob(Y, y, e) * self.enumerate_all(rest, e)
+            del e[Y]
+            return total
+    
+    def prob(self, variable, value, conditions):
+        if len(self.cps[variable]) == 1:
+            return self.cps[variable][0][value][0]
+    '''
+
+        
     def factors(self):
         factores = self.model.get_cpds()
         for factor in factores:
