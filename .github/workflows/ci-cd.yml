@@ -22,7 +22,8 @@ jobs:
 
     - name: Install package
       run: poetry install
- cd:
+  
+  cd:
     # Only run this job if the "ci" job passes
     needs: ci
 
