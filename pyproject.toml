@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "bayesiannetworkai"
-version = "0.1.0"
+version = "0.0.0"
 description = "A package for using Bayesian Networks"
 authors = ["GrupoAI"]
 license = "MIT"
