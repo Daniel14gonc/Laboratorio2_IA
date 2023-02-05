@@ -40,44 +40,10 @@ class BayesianNetwork(object):
         for element in cpds:
             self.model.add_cpds(element)
 
-    def pamientras(self,node,evidence):
+    def enumeration(self,node,evidence):
         inference = VariableElimination(self.model)
         return inference.query(variables =[node], evidence=evidence)
     
-    '''
-    def enumeration(self, X, evidence):
-        Q = {}
-
-        for xi in [0, 1]:
-            evidence[X] = xi
-            Q[xi] = self.enumerate_all(list(self.model.nodes()), evidence)
-
-    def enumerate_all(self, variables, e):
-        if not variables:
-            return 1.0
-        print(variables)
-        print(e)
-        Y = variables[0]
-        # prob(Variable, valor, condiciones)
-        print(self.prob(Y, e[Y], e))
-        return 0
-        
-        if Y in e:
-            return self.prob(Y, e[Y], e) * self.enumerate_all(rest, e)
-
-        else:
-            total = 0
-            for y in [0, 1]:
-                e[Y] = y
-                total += self.prob(Y, y, e) * self.enumerate_all(rest, e)
-            del e[Y]
-            return total
-    
-    def prob(self, variable, value, conditions):
-        if len(self.cps[variable]) == 1:
-            return self.cps[variable][0][value][0]
-    '''
-
         
     def factors(self):
         factores = self.model.get_cpds()
