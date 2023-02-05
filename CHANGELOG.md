@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v0.2.0 (2023-02-05)
+### Feature
+* Cambio menor en enumerate ([`8cba190`](https://github.com/Daniel14gonc/Laboratorio2_IA/commit/8cba19091c9e247b0867f02fd3725fa5e6151a9d))
+* Cambio menor en enumerate ([`e6a1899`](https://github.com/Daniel14gonc/Laboratorio2_IA/commit/e6a18991c750874690135f43fe2e65f7845a44c1))
+
 ## v0.1.0 (2023-02-05)
 ### Feature
 * Add CI/CD workflow ([`a470682`](https://github.com/Daniel14gonc/Laboratorio2_IA/commit/a470682850ec66d71d416ed2cf2d67fb351d7b8c))
