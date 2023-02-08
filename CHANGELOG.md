@@ -2,6 +2,9 @@
 
 <!--next-version-placeholder-->
 
+## v0.2.1 (2023-02-07)
+
+
 ## v0.2.0 (2023-02-05)
 ### Feature
 * Cambio menor en enumerate ([`8cba190`](https://github.com/Daniel14gonc/Laboratorio2_IA/commit/8cba19091c9e247b0867f02fd3725fa5e6151a9d))
