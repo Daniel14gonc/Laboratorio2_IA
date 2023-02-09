@@ -118,14 +118,17 @@ class BayesianNetwork(object):
     def compactness_representation(self):
         parent_relation = {}
         for node in self.graph:
-            if node not in parent_relation:
-                parent_relation[node] = {}
-            
             for child in self.graph[node]:
-                if child in parent_relation:
-                    parent_relation[child].add(node)
-                else:
-                    parent_relation[child] = {node}
+                parent_relation[child] = parent_relation.get(child, set())
+                parent_relation[child].add(node)
+            #if node not in parent_relation:
+            #    parent_relation[node] = {}
+            #
+            #for child in self.graph[node]:
+            #    if child in parent_relation:
+            #        parent_relation[child].add(node)
+            #    else:
+            #        parent_relation[child] = {node}
 
         left_side_equation = "P("
         right_side_equation = ""
