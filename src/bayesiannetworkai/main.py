@@ -23,5 +23,8 @@ bayesian_network = BayesianNetwork(net, nodos)
 # bayesian_network.enumerate_all()
 print(bayesian_network.enumeration('Burglary', {'JohnCalls': 0, 'MaryCalls': 0}))
 
+#print(bayesian_network.compactness_representation())
+#print(bayesian_network.prueba)
+
 
 # print(bayesian_network.compactness_representation())
